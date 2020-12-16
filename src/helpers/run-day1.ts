@@ -5,7 +5,6 @@ export const runDay1 = async (
   callback: (arg: any) => any
 ) => {
   try {
-    console.log("PATH >> ", dataFilePath);
     const dataStr = await fs.readFile(dataFilePath);
     const dataArr: number[] = dataStr
       .toString()
