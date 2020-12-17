@@ -5,7 +5,6 @@ export const day2 = (data: DayTwoPropTypes[]): number => {
     const arr = password.split("").filter((el) => el === alphabet);
     if (arr.length >= lowerLimit && arr.length <= higherLimit) validPasswords++;
   });
-  console.log(`Number of valid passwords >> ${validPasswords}`);
   return validPasswords;
 };
 
@@ -22,8 +21,6 @@ export const day2Part2 = (data: DayTwoPropTypes[]): number => {
       validPasswords++;
     }
   });
-
-  console.log(`Number of valid passwords >> ${validPasswords}`);
   return validPasswords;
 };
 
