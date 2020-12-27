@@ -22,8 +22,8 @@
     "build": "npm run build:types && npm run build:js",
     "build:types": "npx tsc --emitDeclarationOnly",
     "build:js": "babel src --out-dir dist --extensions \".ts,.tsx\" --source-maps inline",
-    "test": "npm run build && mocha src/day*/test.js",
-    "start": "npm run build && node dist/index.js"
+    "test": "npm run build && mocha src/day*/tests.js",
+    "test:day": "./run.sh"
   },
   "repository": {
     "type": "git",

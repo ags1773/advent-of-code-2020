@@ -1,9 +1,10 @@
-// right 3, down 1
+// right 3, down 1. How many trees would you encounter?
 
 export const day3 = (data: string[]): number => {
-  let numberOfTreesEncountered = 0;
-  for (const row of data) {
-  }
+  console.log("******** Inside day3, data >>\n", data);
+  let numberOfTreesEncountered = 7;
+  // for (const row of data) {
+  // }
 
   return numberOfTreesEncountered;
 };
