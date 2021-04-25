@@ -14,4 +14,11 @@ describe("Day 5", () => {
     );
     assert.strictEqual(output, 820);
   });
+  it("should work with input", async () => {
+    const output = await runDay5(
+      path.join(__dirname, "../../data/day5/input"),
+      day5
+    );
+    assert.strictEqual(output, 965);
+  });
 });
