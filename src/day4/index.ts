@@ -25,13 +25,10 @@ export const day4Part2 = (data: PassportDataTypes[]): number => {
       return areFieldsValid;
     }
   );
-  console.log(mapOutput)
   return mapOutput.reduce((a, curr) => (curr ? (a = a + 1) : a), 0);
 };
 
 function validate(passportData: PassportDataTypes): boolean {
-  console.log("*** Inside validate, ", passportData)
-  // const { byr, iyr, eyr, hgt, hcl, ecl, pid, cid } = passportData;
   let isValid: boolean = true;
 
   for (const [key, value] of Object.entries(passportData)) {
@@ -39,38 +36,36 @@ function validate(passportData: PassportDataTypes): boolean {
       case "byr":
         if (!value || typeof value !== "number" || value < 1920 || value > 2002)
           isValid = false;
-          console.log("Invalid byr")
         break;
       case "iyr":
         if (!value || typeof value !== "number" || value < 2010 || value > 2020)
           isValid = false;
-          console.log("Invalid iyr")
         break;
       case "eyr":
         if (!value || typeof value !== "number" || value < 2020 || value > 2030)
           isValid = false;
-          console.log("Invalid eyr")
         break;
       case "hgt":
-        if (!value || typeof value !== "string") {
+        const passesBasicCheck = /^\d+in|cm$/.test(value);
+        if (!value || typeof value !== "string" || !passesBasicCheck) {
           isValid = false;
-          console.log("Invalid hgt")
           break;
         }
         const unit = value.slice(-2);
         const height = Number(value.slice(0, -2));
+        if (isNaN(height) || !unit) {
+          isValid = false;
+          break;
+        }
         if (unit === "cm" && (height < 150 || height > 193)) {
           isValid = false;
-          console.log("Invalid hgt")
           break;
         }
         if (unit === "in" && (height < 59 || height > 76)) isValid = false;
-        console.log("Invalid hgt")
         break;
       case "hcl":
         const isValidHairColor = /^\#[0-9a-f]{6}$/.test(value);
         if (!isValidHairColor) isValid = false;
-        console.log("Invalid hcl")
         break;
       case "ecl":
         const acceptableValues = [
@@ -83,12 +78,11 @@ function validate(passportData: PassportDataTypes): boolean {
           "oth",
         ];
         if (!acceptableValues.includes(value)) isValid = false;
-        console.log("Invalid ecl")
         break;
       case "pid":
         const passportNum = Number(value);
-        if (isNaN(passportNum) || passportNum > 999999999) isValid = false;
-        console.log("Invalid pid")
+        if (value.length !== 9 || isNaN(passportNum) || passportNum > 999999999)
+          isValid = false;
         break;
     }
   }
@@ -102,7 +96,7 @@ interface PassportDataTypes {
   hgt: string | null;
   hcl: string | null;
   ecl: string | null;
-  pid: number | null;
+  pid: string | null;
   cid: number | null;
 }
 

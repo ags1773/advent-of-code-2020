@@ -6,7 +6,6 @@ export async function runDay4(dataFilePath: string, callback: any) {
     const dataArr = data
       .toString()
       .split("\n\n")
-      // .slice(0,1)
       .map((passport) => {
         const fields = passport.split(/ |\n/);
         const obj = {
@@ -16,7 +15,7 @@ export async function runDay4(dataFilePath: string, callback: any) {
           hgt: parse("hgt:", fields, "str"),
           hcl: parse("hcl:", fields, "str"),
           ecl: parse("ecl:", fields, "str"),
-          pid: parse("pid:", fields, "num"),
+          pid: parse("pid:", fields, "str"),
           cid: parse("cid:", fields, "num"),
         };
         return obj;
