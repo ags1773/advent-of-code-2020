@@ -6,17 +6,18 @@ export async function runDay4(dataFilePath: string, callback: any) {
     const dataArr = data
       .toString()
       .split("\n\n")
+      // .slice(0,1)
       .map((passport) => {
         const fields = passport.split(/ |\n/);
         const obj = {
-          byr: parse("byr:", fields),
-          iyr: parse("iyr:", fields),
-          eyr: parse("eyr:", fields),
-          hgt: parse("hgt:", fields),
-          hcl: parse("hcl:", fields),
-          ecl: parse("ecl:", fields),
-          pid: parse("pid:", fields),
-          cid: parse("cid:", fields),
+          byr: parse("byr:", fields, "num"),
+          iyr: parse("iyr:", fields, "num"),
+          eyr: parse("eyr:", fields, "num"),
+          hgt: parse("hgt:", fields, "str"),
+          hcl: parse("hcl:", fields, "str"),
+          ecl: parse("ecl:", fields, "str"),
+          pid: parse("pid:", fields, "num"),
+          cid: parse("cid:", fields, "num"),
         };
         return obj;
       });
@@ -27,8 +28,13 @@ export async function runDay4(dataFilePath: string, callback: any) {
   }
 }
 
-const parse = (re: string, arr: string[]) => {
+const parse = (re: string, arr: string[], type: string) => {
   const regex = RegExp(re);
-  const str = arr.find((el) => regex.test(el));
-  return str ? str.slice(4) : null;
+  const found = arr.find((el) => regex.test(el));
+  if (!found) return null;
+  if (type === "num") {
+    const output = Number(found.slice(4));
+    return isNaN(output) ? null : output;
+  }
+  return found.slice(4);
 };
