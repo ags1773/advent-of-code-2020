@@ -23,7 +23,7 @@
     "build:types": "npx tsc --emitDeclarationOnly",
     "build:js": "babel src --out-dir dist --extensions \".ts,.tsx\" --source-maps inline",
     "test": "npm run build && mocha src/day*/tests.js",
-    "test:day": "./run.sh"
+    "test:day": "./run"
   },
   "repository": {
     "type": "git",
