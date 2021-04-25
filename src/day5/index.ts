@@ -45,3 +45,24 @@ function maximum(arr: number[]): number {
     0
   );
 }
+
+export function day5part2(data: string[]): number {
+  const myPossibleSeadId = [];
+  const seatIds: number[] = data
+    .map((pattern) => {
+      const rowPattern: string = pattern.slice(0, 7);
+      const colPattern: string = pattern.slice(7);
+      const row: number = getRowNumber(rowPattern);
+      const col: number = getColNumber(colPattern);
+      return row * 8 + col;
+    })
+    .sort((a, b) => a - b);
+
+  for (let i = 0; i < seatIds.length; i++) {
+    if (i === 0 || i === seatIds.length - 1) continue;
+    const prevVal = seatIds[i - 1];
+    const currVal = seatIds[i];
+    if (currVal - prevVal !== 1) myPossibleSeadId.push(prevVal + 1);
+  }
+  return myPossibleSeadId[0];
+}
